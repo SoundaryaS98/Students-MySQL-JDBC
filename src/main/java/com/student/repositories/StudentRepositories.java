@@ -71,32 +71,31 @@ public class StudentRepositories {
         return studentList;
     }
 
-    public List<Student> getStudentData(int studentID) throws SQLException, ClassNotFoundException {
+    public Student getStudentData(int studentID) throws SQLException, ClassNotFoundException {
         Connection connection = DatabaseConnection.getDatabaseConnection();
 
         Statement statement =  connection.createStatement();
 
+        Student student = new Student();
+
         String query = "SELECT * FROM Students WHERE student_id = " + studentID;
 
         ResultSet resultSet = statement.executeQuery(query);
-
-        // ArrayList of Student
-        List<Student> studentList = new ArrayList<Student>();
-
-        while(resultSet.next()) {
+        if(resultSet.next() == false) {
+            return null;
+        }
+        else {
+            //resultSet.next();
             // Initiating new Student data object that will carry the particular student data
-            Student student = new Student();
             student.setId(resultSet.getInt("student_id"));
             student.setName(resultSet.getString("student_name"));
             student.setAge(resultSet.getInt("student_age"));
             student.setCourse(resultSet.getString("student_course"));
-
-            // Adding the student to the Student Array List
-            studentList.add(student);
         }
+
         statement.close();
         connection.close();
-        return studentList;
+        return student;
     }
 
     public void deleteStudent(int studentID) throws SQLException, ClassNotFoundException  {

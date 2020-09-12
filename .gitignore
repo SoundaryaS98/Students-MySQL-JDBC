@@ -3,10 +3,11 @@
 /build/
 
 gradle-app.setting
-
+gradlew
 .gradletasknamecache
-
+*.gradle
 *.class
+*.bat
 
 .mtj.tmp/
 

@@ -88,20 +88,18 @@ public class StudentServices {
             System.out.println("Please wait...");
             System.out.print("Enter the ID if the student: ");
             int studentID = scanner.nextInt();
-            List<Student> studentData = studentRepositories.getStudentData(studentID);
-            if(studentData.isEmpty()){
+            Student studentData = studentRepositories.getStudentData(studentID);
+            if(studentData == null){
                 System.out.println("<< No student with ID " + studentID + " >>");
             }
             else{
                 System.out.println("<< Details of student with ID >>" + studentID);
                 System.out.println("<<*>>");
-                for(Student student : studentData){
-                    System.out.println("Id: " + student.getId());
-                    System.out.println("Name: " + student.getName());
-                    System.out.println("Age: " + student.getAge());
-                    System.out.println("Course: " + student.getCourse());
-                    System.out.println("<<*>>");
-                }
+                System.out.println("Id: " + studentData.getId());
+                System.out.println("Name: " + studentData.getName());
+                System.out.println("Age: " + studentData.getAge());
+                System.out.println("Course: " + studentData.getCourse());
+                System.out.println("<<*>>");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,8 +117,9 @@ public class StudentServices {
             System.out.println("Please wait...");
             System.out.print("Enter the ID if the student to be deleted: ");
             int studentID = scanner.nextInt();
-            List<Student> studentData = studentRepositories.getStudentData(studentID);
-            if(studentData.isEmpty()){
+            Student studentData = studentRepositories.getStudentData(studentID);
+
+            if(studentData == null){
                 System.out.println("<< No student with ID " + studentID + " >>");
             }
             else{
